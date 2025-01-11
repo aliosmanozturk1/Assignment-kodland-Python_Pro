@@ -4,7 +4,7 @@ from datetime import datetime
 from questions import questions
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///quiz.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////home/aliosmanozturk/mysite/quiz.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
@@ -26,7 +26,7 @@ def submit():
     data = request.get_json()
     name = data.get('name', '')
     answers = data.get('answers', {})
-    
+
     # Calculate score (10 points per correct answer)
     score = 0
     for q_id, answer in answers.items():
@@ -36,15 +36,15 @@ def submit():
         if question and question.get('type') == 'multiple_choice':
             if answer == question['correct']:
                 score += 10
-    
+
     # Save to database
     user = User(name=name, score=score)
     db.session.add(user)
     db.session.commit()
-    
+
     return jsonify({'success': True, 'score': score})
 
 if __name__ == '__main__':
     with app.app_context():
         db.create_all()
-    app.run(debug=True)
+    app.run()

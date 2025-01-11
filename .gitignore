@@ -171,3 +171,4 @@ cython_debug/
 .pypirc
 .idea/vcs.xml
 /.idea
+.DS_Store
