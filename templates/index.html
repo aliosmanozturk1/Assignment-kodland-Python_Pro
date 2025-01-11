@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Quiz</h1>
+            <div class="best-score">Best Score: <span id="highest-score">{{ highest_score }}</span></div>
+        </header>
+
+        <form id="quiz-form">
+            {% for question in questions %}
+            <div class="question-container">
+                {% if question.type == "multiple_choice" %}
+                    <h2>{{ question.title }}</h2>
+                {% endif %}
+                <p>{{ question.question }}</p>
+                
+                {% if question.type == "text" %}
+                <input type="text" name="q{{ question.id }}" required>
+                {% elif question.type == "multiple_choice" %}
+                {% for option in question.options %}
+                <div class="option">
+                    <input type="radio" name="q{{ question.id }}" value="{{ option }}" required>
+                    <label>{{ option }}</label>
+                </div>
+                {% endfor %}
+                {% endif %}
+            </div>
+            {% endfor %}
+
+            <button type="submit" class="submit-btn">Submit</button>
+        </form>
+    </div>
+
+    <div id="result-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Your Score</h2>
+            <p id="score-display"></p>
+        </div>
+    </div>
+
+    <footer>
+        <p>Developed by Ali Osman Öztürk</p>
+    </footer>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html> 
