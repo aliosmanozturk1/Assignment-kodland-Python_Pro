@@ -80,4 +80,19 @@ footer {
     margin-top: 50px;
     padding: 20px;
     border-top: 1px solid #ddd;
+}
+
+.reset-btn {
+    margin-left: 10px;
+    padding: 5px 10px;
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.8em;
+}
+
+.reset-btn:hover {
+    background-color: #c82333;
 } 

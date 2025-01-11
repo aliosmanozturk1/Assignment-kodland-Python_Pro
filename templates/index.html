@@ -10,7 +10,10 @@
     <div class="container">
         <header>
             <h1>Quiz</h1>
-            <div class="best-score">Best Score: <span id="highest-score">{{ highest_score }}</span></div>
+            <div class="best-score">
+                Best Score: <span id="highest-score">{{ highest_score }}</span>
+                <button id="reset-score" class="reset-btn">Reset Best Score</button>
+            </div>
         </header>
 
         <form id="quiz-form">

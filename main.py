@@ -44,6 +44,17 @@ def submit():
 
     return jsonify({'success': True, 'score': score})
 
+@app.route('/reset-score', methods=['POST'])
+def reset_score():
+    try:
+        # Delete all records from the database
+        db.session.query(User).delete()
+        db.session.commit()
+        return jsonify({'success': True})
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({'success': False, 'error': str(e)})
+
 if __name__ == '__main__':
     with app.app_context():
         db.create_all()

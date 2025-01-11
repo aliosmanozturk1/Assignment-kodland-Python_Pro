@@ -46,4 +46,23 @@ document.getElementById('quiz-form').addEventListener('submit', async (e) => {
 document.querySelector('.close').addEventListener('click', () => {
     document.getElementById('result-modal').style.display = 'none';
     document.getElementById('quiz-form').reset();
+});
+
+// Add this after your existing code
+document.getElementById('reset-score').addEventListener('click', async () => {
+    try {
+        const response = await fetch('/reset-score', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        });
+        
+        const data = await response.json();
+        if (data.success) {
+            document.getElementById('highest-score').textContent = '0';
+        }
+    } catch (error) {
+        console.error('Error:', error);
+    }
 }); 
